@@ -105,13 +105,13 @@ export function Header() {
       </div>
       <div className="relative rounded-t-3xl bg-background">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
-          <Link to="/" className="font-display text-2xl font-bold uppercase tracking-wide">
+          <Link to="/" className="whitespace-nowrap font-display text-xl font-bold uppercase tracking-wide lg:text-2xl">
             Mix<span className="text-saffron">&</span>Match <span className="text-saffron">Dyes</span>
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {NAV.map((n) => (
               <Link key={n.to} to={n.to} onMouseEnter={() => setMega(n.to)} onClick={() => setMega(null)}
-                className={`flex items-center gap-1 rounded-full px-4 py-2 text-[15px] ${mega === n.to ? "bg-saffron/15 text-primary" : ""}`}
+                className={`flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-sm lg:px-4 lg:text-[15px] ${mega === n.to ? "bg-saffron/15 text-primary" : ""}`}
                 activeProps={{ className: "text-primary" }}>
                 {n.label} <ChevronDown size={15} className={`transition ${mega === n.to ? "rotate-180" : ""}`} />
               </Link>
