@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, ArrowDownRight } from "lucide-react";
 import { ProductGrid, CTA, NAV } from "@/components/site";
 import hero from "@/assets/hero.jpg";
 import dyeable from "@/assets/dyeable.jpg";
@@ -25,26 +26,28 @@ const cats = [dyeable, dyeing, printing, garment];
 function Index() {
   return (
     <>
-      <section className="mx-auto grid max-w-7xl items-center gap-12 px-6 pb-16 pt-12 md:grid-cols-[1fr_1.2fr]">
-        <div>
-          <p className="eyebrow">Textiles · Dyeing · Printing</p>
-          <h1 className="mt-5 text-6xl leading-[0.95] md:text-7xl">
-            Colour, <span className="italic text-primary">mixed</span> &amp; matched for you.
-          </h1>
-          <p className="mt-6 max-w-md text-muted-foreground">
-            From a single metre for your next outfit to thousands for your label — fabrics, custom dyeing, printing and garment making, all in one place.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/dyed" className="rounded-md bg-primary px-6 py-3 text-sm text-primary-foreground">Shop fabrics</Link>
-            <Link to="/contact" className="rounded-md border px-6 py-3 text-sm hover:bg-secondary">Bulk enquiry</Link>
+      <section className="mx-auto max-w-7xl px-6 pt-12">
+        <div className="grid items-end gap-8 border-b pb-10 md:grid-cols-[1fr_320px]">
+          <h1 className="font-sans text-6xl font-black leading-[0.95] tracking-tight md:text-8xl">Fabric Sourcing Simplified</h1>
+          <p className="text-lg text-muted-foreground">Your one-stop partner for fabric <b className="text-foreground">sourcing, custom dyeing, printing and garment making</b>, all in one place.</p>
+        </div>
+        <div className="grid gap-8 py-10 md:grid-cols-[260px_1fr]">
+          <div>
+            <div className="flex">
+              <span className="grid h-24 w-24 place-items-center rounded-full bg-primary font-display text-3xl text-primary-foreground">MM</span>
+              <span className="-ml-3 grid h-24 w-24 place-items-center rounded-full border-2 border-saffron bg-background text-saffron"><ArrowDownRight size={36} /></span>
+            </div>
+            <p className="mt-8 text-xl italic">"Finally, a sourcing partner that treats my label like it actually matters."</p>
+            <p className="mt-10 font-display text-5xl">500+</p>
+            <p className="text-sm text-muted-foreground">Brands and makers served</p>
           </div>
-          <div className="mt-10 flex gap-10 text-sm">
-            <div><p className="font-display text-4xl">200+</p><p className="text-muted-foreground">Shades</p></div>
-            <div><p className="font-display text-4xl">1m</p><p className="text-muted-foreground">Min. order</p></div>
-            <div><p className="font-display text-4xl">7 days</p><p className="text-muted-foreground">Sampling</p></div>
+          <div className="relative overflow-hidden rounded-[2.5rem]">
+            <img src={hero} alt="Stack of hand-dyed fabrics" width={1600} height={1008} className="aspect-[16/10] w-full object-cover" />
+            <Link to="/contact" className="absolute bottom-0 right-0 flex items-center gap-4 rounded-tl-[2rem] bg-background p-3">
+              <span className="flex items-center gap-4 rounded-3xl bg-saffron px-7 py-5 text-xl font-medium">Start Sourcing <ArrowRight /></span>
+            </Link>
           </div>
         </div>
-        <img src={hero} alt="Stack of hand-dyed fabrics" width={1600} height={1008} className="aspect-[4/3] w-full rounded-lg object-cover" />
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-6 px-6 py-8 md:grid-cols-2">

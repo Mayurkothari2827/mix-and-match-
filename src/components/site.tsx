@@ -1,6 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Menu, X, Search, User, BookOpen } from "lucide-react";
+import { Menu, X, Search, User, BookOpen, ChevronDown, Phone, ArrowRight, IndianRupee, ChevronLeft } from "lucide-react";
+import imgDyeable from "@/assets/dyeable.jpg";
+import imgDyeing from "@/assets/dyeing.jpg";
+import imgPrinting from "@/assets/printing.jpg";
+import imgGarment from "@/assets/garment.jpg";
 
 export const NAV = [
   { to: "/dyeable", label: "Dyeable" },
@@ -9,41 +13,127 @@ export const NAV = [
   { to: "/garment-manufacturing", label: "Garment Manufacturing" },
 ] as const;
 
-export function Header() {
-  const [open, setOpen] = useState(false);
+type Group = { title: string; blurb: string; items: [string, string][] };
+const MEGA: Record<string, { groups: Group[]; featured: [string, string, string][] }> = {
+  "/dyeable": {
+    groups: [
+      { title: "Woven Fabric", blurb: "Woven for everyone! The go-to fabric for all.", items: [["Cotton Fabric", "Soft and breathable"], ["Linen Fabric", "Textured and airy"], ["Viscose Fabric", "Smooth & flowy"], ["Modal Fabric", "Cool & absorbent"], ["Silk Fabric", "Lustrous & elegant"], ["Polyester Fabric", "Durable & practical"], ["Bemberg Fabric", "Silky & breathable"]] },
+      { title: "Knitted Fabric", blurb: "Stretchy comfort for everyday wear.", items: [["Cotton Fabric", "Breathable comfort"], ["Linen Fabric", "Naturally cool"], ["Viscose Fabric", "Fluid drape"], ["Modal Fabric", "Soft & flexible"]] },
+    ],
+    featured: [["Sustainable Fabric", "Certified & traceable", imgDyeable], ["Schiffli Fabric", "Lightweight embroidery", imgGarment], ["Greige Fabric", "Unfinished and adaptable", imgDyeing], ["Corduroy", "Ribbed & structured", imgPrinting]],
+  },
+  "/dyed": {
+    groups: [
+      { title: "Solid Dyed", blurb: "Ready shades, in stock and ready to ship.", items: [["Cotton Solids", "200+ shades"], ["Rayon Solids", "Fluid & vibrant"], ["Linen Solids", "Earthy tones"], ["Silk Solids", "Rich & lustrous"], ["Crepe Solids", "Fine texture"], ["Georgette Solids", "Sheer & light"]] },
+      { title: "Yarn Dyed", blurb: "Colour woven right into the fabric.", items: [["Checks", "Classic patterns"], ["Stripes", "Bold & subtle"], ["Chambray", "Soft denim look"], ["Ikat", "Handwoven heritage"]] },
+    ],
+    featured: [["Indigo Collection", "Natural indigo", imgDyeing], ["Pastel Edit", "Soft summer shades", imgDyeable], ["Earth Tones", "Plant-based dyes", imgPrinting], ["Festive Colours", "Deep jewel tones", imgGarment]],
+  },
+  "/printing-dyeing": {
+    groups: [
+      { title: "Printing", blurb: "Your design, printed on any fabric.", items: [["Digital Printing", "Photo-real detail"], ["Screen Printing", "Bulk & bold"], ["Block Printing", "Handcrafted"], ["Rotary Printing", "Large runs"]] },
+      { title: "Dyeing", blurb: "Custom colour, matched to your swatch.", items: [["Custom Dyeing", "Any Pantone shade"], ["Tie & Dye", "Artisanal patterns"], ["Ombré Dyeing", "Gradient effects"], ["Natural Dyeing", "Eco-friendly"]] },
+    ],
+    featured: [["Digital Prints", "From 1 metre", imgPrinting], ["Hand Block", "Jaipur artisans", imgDyeable], ["Tie & Dye", "Bandhani & shibori", imgDyeing], ["Colour Matching", "Lab-dip approval", imgGarment]],
+  },
+  "/garment-manufacturing": {
+    groups: [
+      { title: "Womenswear", blurb: "Small-batch and bulk production.", items: [["Kurtas & Sets", "Ethnic wear"], ["Dresses", "Western wear"], ["Tops & Shirts", "Everyday styles"], ["Co-ords", "Matching sets"]] },
+      { title: "Menswear & More", blurb: "End-to-end, from pattern to packing.", items: [["Shirts", "Formal & casual"], ["Kurtas", "Festive & daily"], ["Kidswear", "Soft & safe"], ["Home Linen", "Cushions & more"]] },
+    ],
+    featured: [["Private Label", "Your brand, our make", imgGarment], ["Sampling", "In 7 days", imgDyeable], ["Low MOQ", "From 50 pieces", imgPrinting], ["Export Ready", "Quality checked", imgDyeing]],
+  },
+};
+
+function MegaMenu({ to, close }: { to: string; close: () => void }) {
+  const m = MEGA[to];
+  if (!m) return null;
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
-      <div className="bg-indigo-dye text-primary-foreground">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs">
-          <span>Samples from 1 metre · Bulk orders from 500 metres</span>
-          <div className="flex gap-5">
-            <Link to="/resources" className="flex items-center gap-1 hover:opacity-80"><BookOpen size={14} /> Resources</Link>
-            <Link to="/contact" className="flex items-center gap-1 hover:opacity-80"><User size={14} /> Login</Link>
+    <div className="absolute inset-x-0 top-full border-t bg-card shadow-xl">
+      <div className="mx-auto grid max-w-7xl gap-6 px-6 py-8 lg:grid-cols-[1.1fr_1fr]">
+        <div className="space-y-5">
+          {m.groups.map((g) => (
+            <div key={g.title} className="grid gap-6 rounded-3xl border p-7 md:grid-cols-[180px_1fr]">
+              <div>
+                <h3 className="text-3xl leading-tight">{g.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{g.blurb}</p>
+                <Link to={to} onClick={close} className="mt-5 inline-flex items-center gap-6 border-b border-foreground pb-1 text-sm">View all <ArrowRight size={16} /></Link>
+              </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                {g.items.map(([n, d]) => (
+                  <Link key={n} to={to} onClick={close} className="group">
+                    <span className="flex items-center gap-2 font-medium group-hover:text-primary">{n} <ArrowRight size={14} className="text-saffron" /></span>
+                    <span className="text-xs text-muted-foreground">{d}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <p className="mb-4 font-semibold">Featured Collections</p>
+          <div className="grid grid-cols-2 gap-4">
+            {m.featured.map(([n, d, img]) => (
+              <Link key={n} to={to} onClick={close} className="group rounded-3xl border p-4 hover:border-primary">
+                <div className="flex justify-between"><div><p className="font-medium">{n}</p><p className="text-xs text-muted-foreground">{d}</p></div><ArrowRight size={16} className="text-saffron" /></div>
+                <img src={img} alt={n} loading="lazy" className="mt-3 aspect-[16/9] w-full rounded-2xl object-cover" />
+              </Link>
+            ))}
           </div>
         </div>
       </div>
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
-        <Link to="/" className="font-display text-2xl leading-none">
-          Mix <span className="italic text-primary">&</span> Match Dyes
-        </Link>
-        <nav className="hidden items-center gap-7 text-sm lg:flex">
-          {NAV.map((n) => (
-            <Link key={n.to} to={n.to} className="hover:text-primary" activeProps={{ className: "text-primary" }}>{n.label}</Link>
-          ))}
-        </nav>
-        <div className="hidden items-center gap-3 lg:flex">
-          <div className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm text-muted-foreground"><Search size={14} /> Search fabrics</div>
-          <Link to="/contact" className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90">Contact</Link>
+    </div>
+  );
+}
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+  const [mega, setMega] = useState<string | null>(null);
+  return (
+    <header className="sticky top-0 z-40 bg-foreground" onMouseLeave={() => setMega(null)}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3 text-sm text-background">
+        <div className="flex w-full max-w-sm items-center gap-3 rounded-full border border-background/20 py-1.5 pl-1.5 pr-3">
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-saffron text-foreground"><Search size={15} /></span>
+          <span className="flex-1 opacity-80">Search for materials</span>
+          <kbd className="hidden rounded border border-background/30 px-1.5 text-[10px] opacity-60 sm:block">⌘K</kbd>
         </div>
-        <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu">{open ? <X /> : <Menu />}</button>
+        <div className="hidden items-center gap-3 md:flex">
+          <span className="flex items-center gap-1 rounded-full border border-background/20 px-4 py-2"><IndianRupee size={14} /> INR <ChevronDown size={14} /></span>
+          <Link to="/resources" className="flex items-center gap-2 rounded-full border border-background/20 px-4 py-2 hover:bg-background/10"><BookOpen size={15} /> Resources</Link>
+          <Link to="/contact" className="flex items-center gap-2 rounded-full border border-background/20 px-4 py-2 hover:bg-background/10"><User size={15} /> Login</Link>
+        </div>
       </div>
-      {open && (
-        <nav className="flex flex-col gap-3 border-t px-6 py-4 lg:hidden">
-          {[...NAV, { to: "/resources", label: "Resources" }, { to: "/contact", label: "Contact" }].map((n) => (
-            <Link key={n.to} to={n.to} onClick={() => setOpen(false)}>{n.label}</Link>
-          ))}
-        </nav>
-      )}
+      <div className="relative rounded-t-3xl bg-background">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
+          <Link to="/" className="font-display text-2xl font-bold uppercase tracking-wide">
+            Mix<span className="text-saffron">&</span>Match <span className="text-saffron">Dyes</span>
+          </Link>
+          <nav className="hidden items-center gap-1 lg:flex">
+            {NAV.map((n) => (
+              <Link key={n.to} to={n.to} onMouseEnter={() => setMega(n.to)} onClick={() => setMega(null)}
+                className={`flex items-center gap-1 rounded-full px-4 py-2 text-[15px] ${mega === n.to ? "bg-saffron/15 text-primary" : ""}`}
+                activeProps={{ className: "text-primary" }}>
+                {n.label} <ChevronDown size={15} className={`transition ${mega === n.to ? "rotate-180" : ""}`} />
+              </Link>
+            ))}
+          </nav>
+          <Link to="/contact" className="hidden items-center gap-3 rounded-full bg-foreground py-1.5 pl-6 pr-1.5 text-background lg:flex">
+            Contact <span className="grid h-10 w-10 place-items-center rounded-full bg-background text-foreground"><Phone size={16} /></span>
+          </Link>
+          <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu">{open ? <X /> : <Menu />}</button>
+        </div>
+        {mega && <MegaMenu to={mega} close={() => setMega(null)} />}
+        {open && (
+          <nav className="flex flex-col gap-3 border-t px-6 py-4 lg:hidden">
+            {[...NAV, { to: "/resources", label: "Resources" }, { to: "/contact", label: "Contact" }].map((n) => (
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)}>{n.label}</Link>
+            ))}
+          </nav>
+        )}
+      </div>
+      <Link to="/contact" className="fixed right-0 top-1/2 z-50 flex -translate-y-1/2 flex-col items-center gap-2 rounded-l-xl bg-foreground px-3 py-5 text-xs tracking-[0.2em] text-background [writing-mode:vertical-rl]">
+        <ChevronLeft size={16} className="rotate-90" /> ENQUIRY
+      </Link>
     </header>
   );
 }
