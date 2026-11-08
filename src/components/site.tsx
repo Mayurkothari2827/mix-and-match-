@@ -47,6 +47,7 @@ const MEGA: Record<string, { groups: Group[]; featured: [string, string, string]
 
 function MegaMenu({ to, close }: { to: string; close: () => void }) {
   const m = MEGA[to];
+  if (!m) return null;
   return (
     <div className="absolute inset-x-0 top-full border-t bg-card shadow-xl">
       <div className="mx-auto grid max-w-7xl gap-6 px-6 py-8 lg:grid-cols-[1.1fr_1fr]">
