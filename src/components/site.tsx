@@ -50,7 +50,7 @@ function MegaMenu({ to, close }: { to: string; close: () => void }) {
   if (!m) return null;
   return (
     <div className="absolute inset-x-0 top-full border-t bg-card shadow-xl">
-      <div className="mx-auto grid max-w-7xl gap-6 px-6 py-8 lg:grid-cols-[1.1fr_1fr]">
+      <div className="mx-auto grid max-w-7xl gap-6 px-6 py-8 md:grid-cols-[1.1fr_1fr]">
         <div className="space-y-5">
           {m.groups.map((g) => (
             <div key={g.title} className="grid gap-6 rounded-3xl border p-7 md:grid-cols-[180px_1fr]">
