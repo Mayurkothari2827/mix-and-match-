@@ -108,7 +108,7 @@ export function Header() {
           <Link to="/" className="font-display text-2xl font-bold uppercase tracking-wide">
             Mix<span className="text-saffron">&</span>Match <span className="text-saffron">Dyes</span>
           </Link>
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-1 md:flex">
             {NAV.map((n) => (
               <Link key={n.to} to={n.to} onMouseEnter={() => setMega(n.to)} onClick={() => setMega(null)}
                 className={`flex items-center gap-1 rounded-full px-4 py-2 text-[15px] ${mega === n.to ? "bg-saffron/15 text-primary" : ""}`}
@@ -117,14 +117,14 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <Link to="/contact" className="hidden items-center gap-3 rounded-full bg-foreground py-1.5 pl-6 pr-1.5 text-background lg:flex">
+          <Link to="/contact" className="hidden items-center gap-3 rounded-full bg-foreground py-1.5 pl-6 pr-1.5 text-background md:flex">
             Contact <span className="grid h-10 w-10 place-items-center rounded-full bg-background text-foreground"><Phone size={16} /></span>
           </Link>
-          <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu">{open ? <X /> : <Menu />}</button>
+          <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">{open ? <X /> : <Menu />}</button>
         </div>
         {mega && <MegaMenu to={mega} close={() => setMega(null)} />}
         {open && (
-          <nav className="flex flex-col gap-3 border-t px-6 py-4 lg:hidden">
+          <nav className="flex flex-col gap-3 border-t px-6 py-4 md:hidden">
             {[...NAV, { to: "/resources", label: "Resources" }, { to: "/contact", label: "Contact" }].map((n) => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)}>{n.label}</Link>
             ))}
