@@ -3,14 +3,14 @@ import { PageHero, ProductGrid, Steps, CTA, type Product } from "@/components/si
 import img from "@/assets/dyeing.jpg";
 
 const items: Product[] = [
-  { name: "Terracotta Linen", spec: "160gsm · 58"", price: "₹380", tone: "terracotta" },
-  { name: "Indigo Cotton Twill", spec: "220gsm · 58"", price: "₹210", tone: "indigo" },
-  { name: "Saffron Rayon", spec: "125gsm · 56"", price: "₹95", tone: "saffron" },
-  { name: "Rust Cotton Flex", spec: "140gsm · 58"", price: "₹150", tone: "terracotta" },
-  { name: "Midnight Shibori", spec: "Cotton · 44"", price: "₹240", tone: "indigo" },
-  { name: "Turmeric Muslin", spec: "90gsm · 44"", price: "₹110", tone: "saffron" },
-  { name: "Brick Crepe", spec: "Poly · 110gsm", price: "₹85", tone: "terracotta" },
-  { name: "Navy Modal", spec: "90gsm · 44"", price: "₹220", tone: "indigo" }
+  { name: "Terracotta Linen", spec: `160gsm · 58"`, price: "₹380", tone: "terracotta" },
+  { name: "Indigo Cotton Twill", spec: `220gsm · 58"`, price: "₹210", tone: "indigo" },
+  { name: "Saffron Rayon", spec: `125gsm · 56"`, price: "₹95", tone: "saffron" },
+  { name: "Rust Cotton Flex", spec: `140gsm · 58"`, price: "₹150", tone: "terracotta" },
+  { name: "Midnight Shibori", spec: `Cotton · 44"`, price: "₹240", tone: "indigo" },
+  { name: "Turmeric Muslin", spec: `90gsm · 44"`, price: "₹110", tone: "saffron" },
+  { name: "Brick Crepe", spec: `Poly · 110gsm`, price: "₹85", tone: "terracotta" },
+  { name: "Navy Modal", spec: `90gsm · 44"`, price: "₹220", tone: "indigo" }
 ];
 
 export const Route = createFileRoute("/dyed")({

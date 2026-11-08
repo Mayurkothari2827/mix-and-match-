@@ -3,10 +3,10 @@ import { PageHero, ProductGrid, Steps, CTA, type Product } from "@/components/si
 import img from "@/assets/garment.jpg";
 
 const items: Product[] = [
-  { name: "Kurtas & Tunics", spec: "MOQ 50 pcs", price: "₹420", tone: "terracotta" },
-  { name: "Shirts", spec: "MOQ 50 pcs", price: "₹480", tone: "indigo" },
-  { name: "Dresses", spec: "MOQ 50 pcs", price: "₹560", tone: "saffron" },
-  { name: "Co-ord Sets", spec: "MOQ 50 pcs", price: "₹690", tone: "ecru" }
+  { name: "Kurtas & Tunics", spec: `MOQ 50 pcs`, price: "₹420", tone: "terracotta" },
+  { name: "Shirts", spec: `MOQ 50 pcs`, price: "₹480", tone: "indigo" },
+  { name: "Dresses", spec: `MOQ 50 pcs`, price: "₹560", tone: "saffron" },
+  { name: "Co-ord Sets", spec: `MOQ 50 pcs`, price: "₹690", tone: "ecru" }
 ];
 
 export const Route = createFileRoute("/garment-manufacturing")({

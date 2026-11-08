@@ -3,10 +3,10 @@ import { PageHero, ProductGrid, Steps, CTA, type Product } from "@/components/si
 import img from "@/assets/printing.jpg";
 
 const items: Product[] = [
-  { name: "Digital Print on Rayon", spec: "From 50m", price: "₹140", tone: "terracotta" },
-  { name: "Hand Block Cotton", spec: "From 100m", price: "₹260", tone: "indigo" },
-  { name: "Screen Print Cambric", spec: "From 300m", price: "₹110", tone: "saffron" },
-  { name: "Pantone Dye Match", spec: "From 100m", price: "₹60", tone: "sand" }
+  { name: "Digital Print on Rayon", spec: `From 50m`, price: "₹140", tone: "terracotta" },
+  { name: "Hand Block Cotton", spec: `From 100m`, price: "₹260", tone: "indigo" },
+  { name: "Screen Print Cambric", spec: `From 300m`, price: "₹110", tone: "saffron" },
+  { name: "Pantone Dye Match", spec: `From 100m`, price: "₹60", tone: "sand" }
 ];
 
 export const Route = createFileRoute("/printing-dyeing")({
