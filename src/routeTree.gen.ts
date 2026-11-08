@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DyeableRouteImport } from './routes/dyeable'
+import { Route as DyedRouteImport } from './routes/dyed'
+import { Route as GarmentManufacturingRouteImport } from './routes/garment-manufacturing'
+import { Route as PrintingDyeingRouteImport } from './routes/printing-dyeing'
+import { Route as ResourcesRouteImport } from './routes/resources'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DyeableRoute = DyeableRouteImport.update({
+  id: '/dyeable',
+  path: '/dyeable',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DyedRoute = DyedRouteImport.update({
+  id: '/dyed',
+  path: '/dyed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GarmentManufacturingRoute = GarmentManufacturingRouteImport.update({
+  id: '/garment-manufacturing',
+  path: '/garment-manufacturing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrintingDyeingRoute = PrintingDyeingRouteImport.update({
+  id: '/printing-dyeing',
+  path: '/printing-dyeing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/dyeable': typeof DyeableRoute
+  '/dyed': typeof DyedRoute
+  '/garment-manufacturing': typeof GarmentManufacturingRoute
+  '/printing-dyeing': typeof PrintingDyeingRoute
+  '/resources': typeof ResourcesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/dyeable': typeof DyeableRoute
+  '/dyed': typeof DyedRoute
+  '/garment-manufacturing': typeof GarmentManufacturingRoute
+  '/printing-dyeing': typeof PrintingDyeingRoute
+  '/resources': typeof ResourcesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/dyeable': typeof DyeableRoute
+  '/dyed': typeof DyedRoute
+  '/garment-manufacturing': typeof GarmentManufacturingRoute
+  '/printing-dyeing': typeof PrintingDyeingRoute
+  '/resources': typeof ResourcesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/dyeable'
+    | '/dyed'
+    | '/garment-manufacturing'
+    | '/printing-dyeing'
+    | '/resources'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contact'
+    | '/dyeable'
+    | '/dyed'
+    | '/garment-manufacturing'
+    | '/printing-dyeing'
+    | '/resources'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/dyeable'
+    | '/dyed'
+    | '/garment-manufacturing'
+    | '/printing-dyeing'
+    | '/resources'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  DyeableRoute: typeof DyeableRoute
+  DyedRoute: typeof DyedRoute
+  GarmentManufacturingRoute: typeof GarmentManufacturingRoute
+  PrintingDyeingRoute: typeof PrintingDyeingRoute
+  ResourcesRoute: typeof ResourcesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dyeable': {
+      id: '/dyeable'
+      path: '/dyeable'
+      fullPath: '/dyeable'
+      preLoaderRoute: typeof DyeableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dyed': {
+      id: '/dyed'
+      path: '/dyed'
+      fullPath: '/dyed'
+      preLoaderRoute: typeof DyedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/garment-manufacturing': {
+      id: '/garment-manufacturing'
+      path: '/garment-manufacturing'
+      fullPath: '/garment-manufacturing'
+      preLoaderRoute: typeof GarmentManufacturingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/printing-dyeing': {
+      id: '/printing-dyeing'
+      path: '/printing-dyeing'
+      fullPath: '/printing-dyeing'
+      preLoaderRoute: typeof PrintingDyeingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  DyeableRoute: DyeableRoute,
+  DyedRoute: DyedRoute,
+  GarmentManufacturingRoute: GarmentManufacturingRoute,
+  PrintingDyeingRoute: PrintingDyeingRoute,
+  ResourcesRoute: ResourcesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
